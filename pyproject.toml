@@ -1,0 +1,18 @@
+[project]
+name = "vibe"
+version = "0.1.0"
+description = "Dynamic Python function implementation using LLMs and caching."
+authors = [
+    { name = "root", email = "root@localhost" }
+]
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.7"
+dependencies = [
+    "requests",
+    "python-dotenv",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
