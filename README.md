@@ -14,7 +14,7 @@ def add(a, b):
 print(add(3, 5))
 ```
 
-###🔥 Disclaimer
+### 🔥 Disclaimer
 > There are no safety checks or guardrails. If you instruct it to wipe your hard drive in a docstring, it will do so without hesitation. There is a chance it will wipe out your HDD even if you asked it to return the sum of a and b. You've been warned.
 
 ### How it Works
