@@ -52,7 +52,7 @@ Make sure your LLM server (llama-server, ollama, etc) is running at the given AP
 
 ```
 brew install llama-server
-llama-server -m unsloth_Devstral-Small-2505-GGUF_Devstral-Small-2505-Q8_0.gguf -fa
+llama-server -hf unsloth/Devstral-Small-2505-GGUF:Q8_0
 ```
 
 ### Run example
