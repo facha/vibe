@@ -3,7 +3,7 @@ name = "vibe"
 version = "0.1.0"
 description = "Dynamic Python function implementation using LLMs and caching."
 authors = [
-    { name = "root", email = "root@localhost" }
+    { name = "root", email = "root@localhost.localdomain" }
 ]
 readme = "README.md"
 license = { text = "MIT" }

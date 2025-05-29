@@ -2,14 +2,16 @@ from dataclasses import dataclass
 from typing import Optional
 from vibe import code
 
+
 @dataclass
 class TreeNode:
     data: int
-    children: list['TreeNode'] = None
+    children: list["TreeNode"] = None
 
     def __post_init__(self):
         if self.children is None:
             self.children = []
+
 
 @code
 def insert_node(root: TreeNode, parent_data: int, new_data: int) -> bool:
@@ -26,6 +28,7 @@ def insert_node(root: TreeNode, parent_data: int, new_data: int) -> bool:
     """
     pass
 
+
 @code
 def find_node(root: TreeNode, data: int) -> Optional[TreeNode]:
     """
@@ -39,6 +42,7 @@ def find_node(root: TreeNode, data: int) -> Optional[TreeNode]:
         Optional[TreeNode]: The node with the specified data, or None if not found.
     """
     pass
+
 
 @code
 def delete_node(root: TreeNode, data: int) -> bool:
@@ -54,6 +58,7 @@ def delete_node(root: TreeNode, data: int) -> bool:
     """
     pass
 
+
 @code
 def traverse_preorder(root: TreeNode) -> list[int]:
     """
@@ -66,6 +71,7 @@ def traverse_preorder(root: TreeNode) -> list[int]:
         list[int]: A list of node data in pre-order traversal order.
     """
     pass
+
 
 @code
 def traverse_postorder(root: TreeNode) -> list[int]:
@@ -80,6 +86,7 @@ def traverse_postorder(root: TreeNode) -> list[int]:
     """
     pass
 
+
 @code
 def height(root: TreeNode) -> int:
     """
@@ -92,6 +99,7 @@ def height(root: TreeNode) -> int:
         int: The height of the tree.
     """
     pass
+
 
 # Usage example
 root = TreeNode(1)
@@ -113,6 +121,9 @@ delete_node(root, 4)
 found_node = find_node(root, 4)
 print(f"Found node: {found_node.data if found_node else 'Not found'}")
 
-print("Node 4 was successfully deleted." if not find_node(root, 4) else "Node 4 was not deleted.")
+print(
+    "Node 4 was successfully deleted."
+    if not find_node(root, 4)
+    else "Node 4 was not deleted."
+)
 print("Updated pre-order traversal:", traverse_preorder(root))
-
