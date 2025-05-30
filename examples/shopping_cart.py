@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from typing import List, Optional
+from typing import List
 from vibe import code
 
 class Item(BaseModel):
@@ -27,14 +27,6 @@ class ShoppingCart(BaseModel):
     def calculate_total(self) -> float:
         """Calculates the total price of all items in the shopping cart."""
 
-    @code
-    def save(self, file_name: str = "cart.json"):
-        """Save shopping cart to a json file."""
-
-    @code
-    def load(self, file_name: str = "cart.json"):
-        """Load shopping cart from a json file."""
-
 item1 = Item(id=1, name="Notebook", price=4.99, quantity=3)
 item2 = Item(id=2, name="Pencil", price=0.99, quantity=10)
 item3 = Item(id=3, name="Eraser", price=0.49, quantity=5)
@@ -52,12 +44,4 @@ print(f"Cart: {cart}\nTotal: {cart.calculate_total()}")
 
 print("Removing item...")
 cart.remove_item(item_id=1)
-print(f"Cart: {cart}\nTotal: {cart.calculate_total()}")
-
-print("Saving cart to a file...")
-cart.save()
-
-print("Loading cart back from the file...")
-cart = ShoppingCart()
-cart.load()
 print(f"Cart: {cart}\nTotal: {cart.calculate_total()}")
