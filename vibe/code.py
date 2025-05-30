@@ -34,6 +34,10 @@ def save_code_to_cache(func_name: str, prompt: str, generated_code: str):
     with open(filename, "w", encoding="utf-8") as f:
         f.write(generated_code)
 
+def get_signature(func_stub) -> str:
+    signature = inspect.signature(func_stub)
+    signature_str = re.sub(r"\b__\w+__\.", "", str(signature))
+    return signature_str
 
 def get_func_custom_types(func_stub) -> str:
     sources = set()
@@ -45,31 +49,40 @@ def get_func_custom_types(func_stub) -> str:
             continue
     return "\n\n".join(sources)
 
+def get_source(func_stub) -> str:
+    src = ""
+    src_file = func_stub.__globals__.get('__file__')
+    with open(src_file, 'r', encoding='utf-8') as f:
+        src = f.read()
+    return src
 
 def construct_prompt(func_stub) -> str:
     func_name = func_stub.__name__
-    signature = inspect.signature(func_stub)
-    signature = re.sub(r"\b__\w+__\.", "", str(signature))
     docstring = inspect.getdoc(func_stub)
+    signature = get_signature(func_stub)
     custom_types = get_func_custom_types(func_stub)
+    context = get_source(func_stub)
+
     custom_types_str = ""
     if custom_types:
         custom_types_str = f"""
 The function is using the following custom types:
-
 {custom_types}
-
 These types are defined elsewhere. Do not include their definitions into your code.
 """
 
     prompt = f"""
 You are a Python programmer. Write the implementation of the function which signature will be provided below.
 {custom_types_str}
+The function is executed ih the following context:
+--------
+{context}
+--------
 Function to implement:
 def {func_name}{signature}:
     \"\"\"{docstring}\"\"\"
 
-Include only the function definition. Do not explain it.
+Provide the implementation for the function above. Include only function definition. Do not explain it.
 """
     return prompt
 
