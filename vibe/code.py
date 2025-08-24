@@ -67,15 +67,13 @@ def construct_prompt(func_stub: types.FunctionType) -> str:
     signature = get_signature(func_stub)
     custom_types = get_func_custom_types(func_stub)
     context = get_source(func_stub)
-    custom_types_str = ""
-    if custom_types:
-        custom_types_str = f"""
-The function is using the following custom types:
+
+    custom_types_str = f"""The function is using the following custom types:
 {custom_types}
 These types are defined elsewhere. Do not include their definitions into your code.
-"""
-    prompt = f"""
-You are a Python programmer. Write the implementation of the function which signature will be provided below.
+""" if custom_types else ""
+
+    prompt = f"""You are a Python programmer. Write the implementation of the function which signature will be provided below.
 {custom_types_str}
 The function is executed ih the following context:
 --------
@@ -87,6 +85,7 @@ def {func_name}{signature}:
 
 Provide the implementation for the function above. Include only function definition. Do not explain it.
 """
+
     return prompt
 
 def request_code_from_llm(prompt: str) -> str:
